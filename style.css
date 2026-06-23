@@ -449,3 +449,56 @@ footer{
 .bee.escape img{
     animation:beePanicImg .9s cubic-bezier(.2,.8,.2,1) forwards !important;
 }
+
+.boss-bee{
+    position:fixed;
+    left:50%;
+    top:50%;
+    z-index:20000;
+    pointer-events:none;
+    opacity:0;
+    transform:translate(-50%, -50%) scale(.2);
+}
+
+.boss-bee img{
+    width:95vw;
+    max-width:500px;
+    height:auto;
+}
+
+.boss-bee span{
+    display:block;
+    text-align:center;
+    font-weight:900;
+    font-size:3rem;
+    color:#d62828;
+    text-shadow:
+        2px 2px 0 white,
+        4px 4px 0 rgba(0,0,0,.15);
+}
+
+.boss-bee.attack{
+    animation:bossAttack 4.2s ease-out forwards;
+}
+
+@keyframes bossAttack{
+    0%{
+        opacity:0;
+        transform:translate(-50%, -50%) scale(.2) rotate(0deg);
+    }
+
+    30%{
+        opacity:1;
+        transform:translate(-50%, -50%) scale(1.2) rotate(-10deg);
+    }
+
+    70%{
+        opacity:1;
+        transform:translate(-50%, -50%) scale(1.8) rotate(10deg);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(-50%, -50%) scale(.2) rotate(0deg);
+    }
+}

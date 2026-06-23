@@ -39,6 +39,11 @@
         <img src="assets/bee1.png" alt="">
     </div>
 
+    <div id="bossBee" class="boss-bee">
+        <img src="assets/bee3.png" alt="">
+        <span>Autsch!</span>
+    </div>
+
 </div>
 
 
@@ -236,8 +241,22 @@
 
 
 <script>
+let beeClickCount = 0;
+
 document.querySelectorAll('.bee').forEach(bee => {
+
     bee.addEventListener('click', () => {
+
+        beeClickCount++;
+
+        if(beeClickCount % 3 === 0){
+            const bossBee = document.getElementById('bossBee');
+
+            bossBee.classList.remove('attack');
+            void bossBee.offsetWidth;
+            bossBee.classList.add('attack');
+        }
+
         const rect = bee.getBoundingClientRect();
         const middle = window.innerWidth / 2;
 
@@ -252,7 +271,9 @@ document.querySelectorAll('.bee').forEach(bee => {
         setTimeout(() => {
             bee.classList.remove('escape');
         }, 4000);
+
     });
+
 });
 </script>
 
