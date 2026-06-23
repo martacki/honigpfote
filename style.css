@@ -230,8 +230,8 @@ footer{
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:9999;
     overflow:hidden;
+    z-index:1000;
 }
 
 .flowers{
@@ -254,12 +254,15 @@ footer{
 .bee img{
     width:100px;
     animation:beeBuzz .15s infinite alternate;
+    transition:transform .8s ease, opacity .8s ease;
+    pointer-events:auto;
 }
 
 .bee{
     position:fixed;
     z-index:10000;
-    pointer-events:none;
+    pointer-events:auto;
+    cursor:pointer;
 }
 
 .bee1{
@@ -421,4 +424,28 @@ footer{
         bottom:0;
     }
 
+}
+
+@keyframes beePanicImg{
+    0%{
+        transform:rotate(0deg) scale(1);
+        opacity:1;
+    }
+
+    15%{
+        transform:translate(-10px, 0) rotate(-15deg) scale(1.05);
+    }
+
+    30%{
+        transform:translate(15px, -5px) rotate(var(--turn)) scale(1);
+    }
+
+    100%{
+        transform:translate(var(--escape-x), var(--escape-y)) rotate(var(--turn)) scale(.4);
+        opacity:0;
+    }
+}
+
+.bee.escape img{
+    animation:beePanicImg .9s cubic-bezier(.2,.8,.2,1) forwards !important;
 }

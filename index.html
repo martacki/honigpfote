@@ -186,7 +186,7 @@
         Die Damen mögen zwar deutlich kleiner sein als Snoopy, leisten aber den mit Abstand größten Beitrag.<br>
         <br>
         Aus der Begeisterung für unsere Bienen, die Natur und Snoopies Leidenschaft für ausgedehnte Nickerchen im Schatten entstand schließlich unsere kleine Imkerei.
-        Statt auf große Produktionsmengen setzen wir auf eine naturnahe Imkerei und stellen deshlab unsere Produkte nur in kleinen Mengen her. <br>
+        Statt auf große Produktionsmengen setzen wir auf eine naturnahe Imkerei und stellen deshalb unsere Produkte nur in kleinen Mengen her. <br>
         <br>
         Außerdem liegt uns die Förderung heimischer Insekten am Herzen.
         Unser Imkerverein überzeugt mit wildbienenfreundlichen Blumen rund um seinen Bienenstand, und auch in unserem Garten versuchen wir solche Lebensräume zu schaffen.
@@ -224,8 +224,37 @@
 </main>
 
 <footer>
-    <p>© 2026 Imkerei Honigpfote ♥</p>
+    <p>
+        © 2026 Imkerei Honigpfote ♥
+    </p>
+
+    <p>
+        <a href="impressum.html">Impressum</a> ·
+        <a href="datenschutz.html">Datenschutz</a>
+    </p>
 </footer>
+
+
+<script>
+document.querySelectorAll('.bee').forEach(bee => {
+    bee.addEventListener('click', () => {
+        const rect = bee.getBoundingClientRect();
+        const middle = window.innerWidth / 2;
+
+        const toRight = rect.left < middle;
+
+        bee.style.setProperty('--escape-x', toRight ? '120vw' : '-120vw');
+        bee.style.setProperty('--escape-y', '-35vh');
+        bee.style.setProperty('--turn', toRight ? '25deg' : '205deg');
+
+        bee.classList.add('escape');
+
+        setTimeout(() => {
+            bee.classList.remove('escape');
+        }, 4000);
+    });
+});
+</script>
 
 </body>
 </html>
