@@ -255,6 +255,10 @@ document.querySelectorAll('.bee').forEach(bee => {
             bossBee.classList.remove('attack');
             void bossBee.offsetWidth;
             bossBee.classList.add('attack');
+
+            setTimeout(() => {
+                bossBee.classList.remove('attack');
+            }, 4300);
         }
 
         const rect = bee.getBoundingClientRect();

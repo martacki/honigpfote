@@ -457,6 +457,7 @@ footer{
     z-index:20000;
     pointer-events:none;
     opacity:0;
+    visibility:hidden;
     transform:translate(-50%, -50%) scale(.2);
 }
 
@@ -478,27 +479,29 @@ footer{
 }
 
 .boss-bee.attack{
+    visibility:visible;
     animation:bossAttack 4.2s ease-out forwards;
 }
+
 
 @keyframes bossAttack{
     0%{
         opacity:0;
-        transform:translate(-50%, -50%) scale(.2) rotate(0deg);
+        transform:translate(-50%, -50%) scale(.2);
     }
 
-    30%{
+    25%{
         opacity:1;
-        transform:translate(-50%, -50%) scale(1.2) rotate(-10deg);
+        transform:translate(-50%, -50%) scale(1.2);
     }
 
-    70%{
+    75%{
         opacity:1;
-        transform:translate(-50%, -50%) scale(1.8) rotate(10deg);
+        transform:translate(-50%, -50%) scale(1.8);
     }
 
     100%{
         opacity:0;
-        transform:translate(-50%, -50%) scale(.2) rotate(0deg);
+        transform:translate(-50%, -50%) scale(.2);
     }
 }
