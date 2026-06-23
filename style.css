@@ -407,8 +407,18 @@ footer{
 @media (max-width: 768px){
 
     .flowers{
-        opacity:0.12;
-        width:220px;
+        width:60px;
+        opacity:0.02;
+    }
+
+    .flowers-left{
+        left:-10px;
+        bottom:0;
+    }
+
+    .flowers-right{
+        right:-10px;
+        bottom:0;
     }
 
 }
