@@ -505,3 +505,85 @@ footer{
         transform:translate(-50%, -50%) scale(.2);
     }
 }
+
+.bee-reward{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+
+    background:#fff8e8;
+    border:2px solid #d9a441;
+    border-radius:20px;
+    padding:12px 20px;
+
+    font-weight:bold;
+    color:#7a4a00;
+
+    z-index:50000;
+
+    opacity:0;
+    transition:opacity .5s ease;
+
+    pointer-events:none;
+}
+
+.bee.loved::before,
+.bee.loved::after{
+    position:absolute;
+    color:#e06a8d;
+    font-size:22px;
+    pointer-events:none;
+}
+
+.bee.loved::before{
+    content:"♡";
+    left:35%;
+    top:-18px;
+
+    animation:heartFloat1 2s infinite;
+}
+
+.bee.loved::after{
+    content:"♡";
+    left:60%;
+    top:-10px;
+
+    animation:heartFloat2 2.4s infinite;
+}
+
+@keyframes heartFloat1{
+
+    0%{
+        opacity:0;
+        transform:translateY(0);
+    }
+
+    30%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(-25px);
+    }
+
+}
+
+@keyframes heartFloat2{
+
+    0%{
+        opacity:0;
+        transform:translateY(0);
+    }
+
+    30%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(-35px) translateX(8px);
+    }
+
+}

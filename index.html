@@ -44,6 +44,10 @@
         <span>Autsch!</span>
     </div>
 
+    <div id="beeReward" class="bee-reward">
+        Danke, dass du die Bienen summen lässt ♥
+    </div>
+
 </div>
 
 
@@ -90,14 +94,15 @@
             <article class="produkt-card soldout">
                 <div class="badge">Nicht vorrätig.</div>
 
-                <img src="assets/honig3.png" alt="Sommerblütenhonig cremig gerührt">
+                <img src="assets/honig2.png" alt="Sommerblütenhonig">
 
                 <h3>Sommerblütenhonig</h3>
 
-                <div class="preis">9,00 €</div>
+                <div class="preis">9,00 € / 500g</div>
+                <div class="preis">5,00 € / 250g</div>
 
               <p>
-                  Cremig gerührter Honig aus Sommerblüten,
+                  Honig aus Sommerblüten,
                   Obstbäumen, Feldern und Wäldern rund um
                   Forstinning im Münchner Osten.
               </p>
@@ -241,7 +246,34 @@
 
 
 <script>
+
 let beeClickCount = 0;
+let rewardTimer = 0;
+
+const reward = document.getElementById('beeReward');
+const bossBee = document.getElementById('bossBee');
+
+function scheduleReward(){
+
+    clearTimeout(rewardTimer);
+
+    rewardTimer = setTimeout(() => {
+
+        document.querySelectorAll('.bee').forEach(bee => {
+            bee.classList.add('loved');
+        });
+
+        reward.style.opacity = "1";
+
+        setTimeout(() => {
+            reward.style.opacity = "0";
+        }, 4000);
+
+    }, 15000);
+
+}
+
+scheduleReward();
 
 document.querySelectorAll('.bee').forEach(bee => {
 
@@ -249,16 +281,23 @@ document.querySelectorAll('.bee').forEach(bee => {
 
         beeClickCount++;
 
+        // Vertrauen verloren
+        bee.classList.remove('loved');
+
+        scheduleReward();
+
         if(beeClickCount % 3 === 0){
-            const bossBee = document.getElementById('bossBee');
 
             bossBee.classList.remove('attack');
+
             void bossBee.offsetWidth;
+
             bossBee.classList.add('attack');
 
             setTimeout(() => {
                 bossBee.classList.remove('attack');
             }, 4300);
+
         }
 
         const rect = bee.getBoundingClientRect();
@@ -279,6 +318,7 @@ document.querySelectorAll('.bee').forEach(bee => {
     });
 
 });
+
 </script>
 
 </body>
