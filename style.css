@@ -133,6 +133,9 @@ html{
     position:relative;
 
     z-index:1;
+
+    cursor:pointer;
+
 }
 
 .produkt-card:hover{
@@ -142,6 +145,64 @@ html{
 .produkt-card img{
     width:100%;
     max-width:260px;
+}
+
+.product-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(58,48,38,.55);
+    backdrop-filter:blur(8px);
+    z-index:60000;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+}
+
+.product-modal.open{
+    display:flex;
+}
+
+.product-modal-content{
+    position:relative;
+    width:min(950px, 95vw);
+    max-height:90vh;
+    overflow:auto;
+
+    background:#fff8ee;
+    border:1px solid #ead9b7;
+    border-radius:28px;
+    padding:35px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.18);
+    text-align:center;
+}
+
+.modal-close{
+    position:absolute;
+    top:18px;
+    right:22px;
+
+    border:none;
+    background:none;
+    font-size:36px;
+    cursor:pointer;
+    color:#7c6f5f;
+}
+
+.modal-images{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+    gap:18px;
+    margin-top:25px;
+}
+
+.modal-images img{
+    width:100%;
+    border-radius:18px;
+    background:#f8f0df;
 }
 
 .preis{

@@ -91,8 +91,7 @@
 
         <div class="produkt-grid">
 
-            <article class="produkt-card soldout">
-                <div class="badge">Nicht vorrätig.</div>
+            <article class="produkt-card" onclick="openGallery('honig')">
 
                 <img src="assets/honig2.png" alt="Sommerblütenhonig">
 
@@ -105,10 +104,11 @@
                   Honig aus Sommerblüten,
                   Obstbäumen, Feldern und Wäldern rund um
                   Forstinning im Münchner Osten.
+                  Ernte aus dem Juni 2026.
               </p>
             </article>
 
-            <article class="produkt-card">
+            <article class="produkt-card" onclick="openGallery('kerzen')">
                 <img src="assets/kerzen3.png" alt="Bienenwachskerzen">
 
                 <h3>Kerzen</h3>
@@ -121,7 +121,7 @@
                 </p>
             </article>
 
-            <article class="produkt-card soldout">
+            <article class="produkt-card soldout" onclick="openGallery('met')">
                 <div class="badge">Nicht vorrätig.</div>
 
                 <img src="assets/met-kirsche3.png" alt="Honigmet mit Kirsche">
@@ -245,80 +245,140 @@
 </footer>
 
 
+<div id="productModal" class="product-modal">
+    <div class="product-modal-content">
+
+        <button class="modal-close" onclick="closeGallery()">×</button>
+
+        <h2 id="modalTitle"></h2>
+
+        <div id="modalImages" class="modal-images"></div>
+
+    </div>
+</div>
+
 <script>
 
-let beeClickCount = 0;
-let rewardTimer = 0;
+    let beeClickCount = 0;
+    let rewardTimer = 0;
 
-const reward = document.getElementById('beeReward');
-const bossBee = document.getElementById('bossBee');
+    const reward = document.getElementById('beeReward');
+    const bossBee = document.getElementById('bossBee');
 
-function scheduleReward(){
+    function scheduleReward(){
 
-    clearTimeout(rewardTimer);
+        clearTimeout(rewardTimer);
 
-    rewardTimer = setTimeout(() => {
+        rewardTimer = setTimeout(() => {
 
-        document.querySelectorAll('.bee').forEach(bee => {
-            bee.classList.add('loved');
-        });
+            document.querySelectorAll('.bee').forEach(bee => {
+                bee.classList.add('loved');
+            });
 
-        reward.style.opacity = "1";
-
-        setTimeout(() => {
-            reward.style.opacity = "0";
-        }, 4000);
-
-    }, 15000);
-
-}
-
-scheduleReward();
-
-document.querySelectorAll('.bee').forEach(bee => {
-
-    bee.addEventListener('click', () => {
-
-        beeClickCount++;
-
-        // Vertrauen verloren
-        bee.classList.remove('loved');
-
-        scheduleReward();
-
-        if(beeClickCount % 3 === 0){
-
-            bossBee.classList.remove('attack');
-
-            void bossBee.offsetWidth;
-
-            bossBee.classList.add('attack');
+            reward.style.opacity = "1";
 
             setTimeout(() => {
+                reward.style.opacity = "0";
+            }, 5000);
+
+        }, 60000);
+
+    }
+
+    scheduleReward();
+
+    document.querySelectorAll('.bee').forEach(bee => {
+
+        bee.addEventListener('click', () => {
+
+            beeClickCount++;
+
+            // Vertrauen verloren
+            bee.classList.remove('loved');
+
+            scheduleReward();
+
+            if(beeClickCount % 3 === 0){
+
                 bossBee.classList.remove('attack');
-            }, 4300);
 
-        }
+                void bossBee.offsetWidth;
 
-        const rect = bee.getBoundingClientRect();
-        const middle = window.innerWidth / 2;
+                bossBee.classList.add('attack');
 
-        const toRight = rect.left < middle;
+                setTimeout(() => {
+                    bossBee.classList.remove('attack');
+                }, 4300);
 
-        bee.style.setProperty('--escape-x', toRight ? '120vw' : '-120vw');
-        bee.style.setProperty('--escape-y', '-35vh');
-        bee.style.setProperty('--turn', toRight ? '25deg' : '205deg');
+            }
 
-        bee.classList.add('escape');
+            const rect = bee.getBoundingClientRect();
+            const middle = window.innerWidth / 2;
 
-        setTimeout(() => {
-            bee.classList.remove('escape');
-        }, 4000);
+            const toRight = rect.left < middle;
+
+            bee.style.setProperty('--escape-x', toRight ? '120vw' : '-120vw');
+            bee.style.setProperty('--escape-y', '-35vh');
+            bee.style.setProperty('--turn', toRight ? '25deg' : '205deg');
+
+            bee.classList.add('escape');
+
+            setTimeout(() => {
+                bee.classList.remove('escape');
+            }, 4000);
+
+        });
 
     });
 
-});
+</script>
 
+<script>
+    const productGalleries = {
+        honig: {
+            title: "Unser Honig",
+            images: [
+                "assets/honig/honig_2025.1.png",
+                "assets/honig/honig_2025.2.png"
+            ]
+        },
+        kerzen: {
+            title: "Unsere Bienenwachskerzen",
+            images: [
+                "assets/kerze/rose_2026.1.jpg",
+                "assets/kerze/stump_2026.1.jpg"
+            ]
+        },
+        met: {
+            title: "Unser Honigmet (mit Kirsche)",
+            images: [
+            ]
+        }
+    };
+
+    function openGallery(product){
+        const modal = document.getElementById("productModal");
+        const title = document.getElementById("modalTitle");
+        const images = document.getElementById("modalImages");
+
+        title.textContent = productGalleries[product].title;
+
+        images.innerHTML = productGalleries[product].images
+            .map(src => `<img src="${src}" alt="">`)
+            .join("");
+
+        modal.classList.add("open");
+    }
+
+    function closeGallery(){
+        document.getElementById("productModal").classList.remove("open");
+    }
+
+    document.getElementById("productModal").addEventListener("click", event => {
+        if(event.target.id === "productModal"){
+            closeGallery();
+        }
+    });
 </script>
 
 </body>
