@@ -485,6 +485,32 @@ footer{
         bottom:0;
     }
 
+     .header nav{
+        justify-content:flex-start;
+        gap:10px;
+        padding:12px 14px;
+        overflow-x:auto;
+        white-space:nowrap;
+        scrollbar-width:none;
+    }
+
+    .header nav::-webkit-scrollbar{
+        display:none;
+    }
+
+    .header a{
+        flex:0 0 auto;
+        font-size:.9rem;
+        padding:8px 14px;
+        border-radius:999px;
+        background:rgba(255,248,238,.9);
+        border:1px solid rgba(201,174,122,.35);
+    }
+
+    .hero{
+        padding-top:95px;
+    }
+
 }
 
 @keyframes beePanicImg{
